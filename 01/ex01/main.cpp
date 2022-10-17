@@ -7,5 +7,7 @@ int	main (void){
 		z[i].announce();
 	}
 	killZombies(z, 8);
+	delete [] z;
+
 	return 0;
 }
