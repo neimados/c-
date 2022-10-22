@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
+#include <sstream>
 
 int	main(int argc, char **argv){
 	std::ifstream		input;

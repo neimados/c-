@@ -6,6 +6,7 @@ int	main(void){
 	z->~Zombie();
 	std::cout<<std::endl;
 	randomChump("stack");
+	delete z;
 
 	return 0;
 }

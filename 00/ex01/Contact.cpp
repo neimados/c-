@@ -27,23 +27,28 @@ void	Contact::setContact(){
 
 	while (firstname == ""){
 		std::cout<<"Enter First Name : "<<std::endl;
-		std::getline(std::cin, firstname);
+		if (!std::getline(std::cin, firstname))
+			return;
 	}
 	while (lastname == ""){
 		std::cout<<"Enter Last Name : "<<std::endl;
-		std::getline(std::cin, lastname);
+		if (!std::getline(std::cin, lastname))
+			return;
 	}
 	while (nickname == ""){
 		std::cout<<"Enter Nick Name : "<<std::endl;
-		std::getline(std::cin, nickname);
+		if (!std::getline(std::cin, nickname))
+			return;
 	}
 	while (phone == "" || checkDigit(phone)){
 		std::cout<<"Enter Phone (number only) : "<<std::endl;
-		std::getline(std::cin, phone);
+		if (!std::getline(std::cin, phone))
+			return;
 	}
 	while (secret == ""){
 		std::cout<<"Enter Secret : "<<std::endl;
-		std::getline(std::cin, secret);
+		if (!std::getline(std::cin, secret))
+			return;
 	}
 	_firstName = firstname;
 	_lastName = lastname;

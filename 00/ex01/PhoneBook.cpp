@@ -60,7 +60,8 @@ void	PhoneBook::getPhoneBook(){
 		}
 		while (input == "" || checkIndex(input)){
 			std::cout<<"Enter index (0 to 7) : "<<std::endl;
-			std::getline(std::cin, input);
+			if (!std::getline(std::cin, input))
+				return;
 		}
 		if (_c[std::stoi(input)].getFirstName() == ""){
 			std::cout<<"Contact not added yet"<<std::endl;

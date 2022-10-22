@@ -8,7 +8,8 @@ int	main(void){
 	
 	while (input != "EXIT"){
 		std::cout<<"Choose an action : ADD, SEARCH, EXIT"<<std::endl;
-		std::getline(std::cin, input);
+		if (!std::getline(std::cin, input))
+			return 0;
 		if (input == "ADD"){
 			p.setPhoneBook(i);
 			i++;

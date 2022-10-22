@@ -15,6 +15,5 @@ class Zombie {
 };
 
 Zombie*	zombieHorde(int N, std::string name);
-void	killZombies(Zombie* z, int N);
 
 #endif

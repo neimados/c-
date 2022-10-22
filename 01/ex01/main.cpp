@@ -6,7 +6,6 @@ int	main (void){
 		std::cout<<i<<':';
 		z[i].announce();
 	}
-	killZombies(z, 8);
 	delete [] z;
 
 	return 0;
