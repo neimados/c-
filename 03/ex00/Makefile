@@ -2,7 +2,7 @@ SRCS = main.cpp ClapTrap.cpp
 CC = c++
 NAME = open
 
-CFLANG = -Wall -Wextra -Werror -std=c++98
+CFLAG = -Wall -Wextra -Werror -std=c++98
 OBJS = $(SRCS:.cpp=.o)
 
 

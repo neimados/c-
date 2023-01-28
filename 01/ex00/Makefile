@@ -2,7 +2,7 @@ SRCS = main.cpp newZombie.cpp randomChump.cpp Zombie.cpp
 CC = c++
 NAME = braiiinz
 
-CFLANG = -Wall -Wextra -Werror -std=c++98
+CFLAG = -Wall -Wextra -Werror -std=c++98
 OBJS = $(SRCS:.cpp=.o)
 
 

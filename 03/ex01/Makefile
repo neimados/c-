@@ -1,6 +1,6 @@
-SRCS = main.cpp Weapon.cpp HumanA.cpp HumanB.cpp
+SRCS = main.cpp ClapTrap.cpp ScavTrap.cpp
 CC = c++
-NAME = unnecessaryViolence
+NAME = serena
 
 CFLAG = -Wall -Wextra -Werror -std=c++98
 OBJS = $(SRCS:.cpp=.o)
