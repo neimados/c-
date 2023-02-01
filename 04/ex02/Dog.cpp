@@ -6,12 +6,12 @@ Dog::Dog(): _b(new Brain())
 	std::cout<<"Dog default constructor called"<<std::endl;
 }
 
-Dog::Dog(std::string name): Animal(name), _b(new Brain()){
+Dog::Dog(std::string name): AAnimal(name), _b(new Brain()){
 	this->type = name;
 	std::cout<<"Dog constructor called"<<std::endl;
 }
 
-Dog::Dog(const Dog &d): Animal(d)
+Dog::Dog(const Dog &d): AAnimal(d)
 {
 	std::cout<<"Dog copy constructor called"<<std::endl;
 	*this = d;

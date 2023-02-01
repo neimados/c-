@@ -7,12 +7,12 @@ Cat::Cat(): _b(new Brain())
 	std::cout<<"Cat default constructor called"<<std::endl;
 }
 
-Cat::Cat(std::string name): Animal(name), _b(new Brain())
+Cat::Cat(std::string name): AAnimal(name), _b(new Brain())
 {
 	std::cout<<"Cat constructor called"<<std::endl;
 }
 
-Cat::Cat(const Cat &c): Animal(c)
+Cat::Cat(const Cat &c): AAnimal(c)
 {
 	std::cout<<"Cat copy constructor called"<<std::endl;
 	*this = c;

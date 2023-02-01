@@ -1,4 +1,4 @@
-#include "Animal.hpp"
+#include "AAnimal.hpp"
 #include "Dog.hpp"
 #include "Cat.hpp"
 #include "WrongAnimal.hpp"
@@ -7,7 +7,7 @@
 
 int main()
 {
-	const Animal	*a[4];
+	const AAnimal	*a[4];
 
 	for (int i = 0; i < 4; i++){
 		if (i % 2 == 0){
@@ -51,6 +51,8 @@ int main()
 	std::cout<<std::endl;
 	std::cout<<std::endl;
 	delete copy;
+
+	// AAnimal	*aze= new AAnimal();
 
 	return 0;
 }
