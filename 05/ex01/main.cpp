@@ -49,6 +49,7 @@ int	main(void){
 		std::cout<<*f3<<std::endl;
 		a->signForm(*f3);
 		std::cout<<*f3<<std::endl;
+		b->signForm(*f3);
 
 		delete f3;
 	}

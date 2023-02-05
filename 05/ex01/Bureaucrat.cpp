@@ -73,12 +73,7 @@ void	Bureaucrat::decrement(){
 }
 
 void	Bureaucrat::signForm(Form &f){
-	try{
-		f.beSigned(*this);
-	}
-	catch (std::exception &e){
-		std::cout<<e.what()<<std::endl;
-	}
+	f.beSigned(*this);
 }
 
 std::ostream &operator<<(std::ostream &out, Bureaucrat const &b)
