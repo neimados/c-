@@ -82,7 +82,6 @@ const char* AForm::NotSigned::what() const throw(){
 void	AForm::beSigned(const Bureaucrat &b){
 	if (b.getGrade() > this->_signReq || b.getGrade() > this->_execReq){
 		std::cout<<b.getName()<<" couldn't sign "<<this->getName()<<" because his grade is too low."<<std::endl;
-		delete this;
 		throw AForm::GradeTooLowException();
 	}
 	this->_signed = true;

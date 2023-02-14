@@ -42,17 +42,12 @@ void	ShrubberyCreationForm::execute(const Bureaucrat &b) const{
          |  |\n\
          |  |\n\
   ______/___|____\n";
-	try {
-		this->check(b);
-		output.open(filename, std::ios_base::app);
-		if (!output.is_open()){
-			std::cout<<"File creation error!"<<std::endl;
-			return;
-		}
-		output << tree;
-		output.close();
+	this->check(b);
+	output.open(filename, std::ios_base::app);
+	if (!output.is_open()){
+		std::cout<<"File creation error!"<<std::endl;
+		return;
 	}
-	catch(std::exception &e){
-		std::cout<<e.what()<<std::endl;
-	}
+	output << tree;
+	output.close();
 }
