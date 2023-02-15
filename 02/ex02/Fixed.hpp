@@ -30,10 +30,10 @@ class Fixed{
 		Fixed operator--();
 		Fixed operator--(int);
 
-		static Fixed min(Fixed &ref1, Fixed &ref2);
-		static Fixed min(Fixed const &ref1, Fixed const &ref2);
-		static Fixed max(Fixed &ref1, Fixed &ref2);
-		static Fixed max(Fixed const &ref1, Fixed const &ref2);
+		static Fixed &min(Fixed &ref1, Fixed &ref2);
+		static Fixed const &min(Fixed const &ref1, Fixed const &ref2);
+		static Fixed &max(Fixed &ref1, Fixed &ref2);
+		static Fixed const &max(Fixed const &ref1, Fixed const &ref2);
 
 		int		getRawBits(void) const;
 		void	setRawBits(int const raw);

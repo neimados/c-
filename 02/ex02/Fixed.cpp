@@ -109,25 +109,25 @@ Fixed Fixed::operator--(int){
 	return tmp;
 }
 
-Fixed Fixed::min (Fixed &ref1, Fixed &ref2){
+Fixed &Fixed::min (Fixed &ref1, Fixed &ref2){
 	if (ref1 > ref2)
 		return ref2;
 	return ref1;
 }
 
-Fixed Fixed::min (Fixed const &ref1, Fixed const &ref2){
+Fixed const &Fixed::min (Fixed const &ref1, Fixed const &ref2){
 	if (ref1 > ref2)
 		return ref2;
 	return ref1;
 }
 
-Fixed Fixed::max (Fixed &ref1, Fixed &ref2){
+Fixed &Fixed::max (Fixed &ref1, Fixed &ref2){
 	if (ref1 < ref2)
 		return ref2;
 	return ref1;
 }
 
-Fixed Fixed::max (Fixed const &ref1, Fixed const &ref2){
+Fixed const &Fixed::max (Fixed const &ref1, Fixed const &ref2){
 	if (ref1 < ref2)
 		return ref2;
 	return ref1;
