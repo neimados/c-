@@ -1,4 +1,5 @@
 SRCS = main.cpp ScalarConverter.cpp
+CC = c++
 NAME = scalar
 
 CFLAG = -Wall -Wextra -Werror -std=c++98
