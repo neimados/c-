@@ -1,7 +1,7 @@
 SRCS = main.cpp Fixed.cpp
 CC = c++
 NAME = first
-
+HEADERS = Fixed.hpp
 CFLAG = -Wall -Wextra -Werror -std=c++98
 OBJS = $(SRCS:.cpp=.o)
 
@@ -10,6 +10,9 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAG) -o $(NAME) $(OBJS)
+
+%.o : %.cpp $(HEADERS) Makefile
+	$(CC) $(CFLAG) -I . -c $< -o $@
 
 clean:
 	rm -f $(OBJS)

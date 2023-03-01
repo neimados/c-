@@ -7,6 +7,7 @@ int	main(int argc, char **argv){
 	std::ifstream		input;
 	std::ofstream		output;
 	std::string 		filename;
+	std::string			outfile;
 	std::string			s1;
 	std::string			s2;
 	std::stringstream	ss;
@@ -24,7 +25,8 @@ int	main(int argc, char **argv){
 			std::cout<<"Arguments error"<<std::endl;
 			return 1;
 		}
-		output.open(filename.append(".replace"));
+		outfile = filename.append(".replace");
+		output.open(outfile.c_str());
 		if (!output.is_open()){
 			std::cout<<"Arguments error"<<std::endl;
 			input.close();

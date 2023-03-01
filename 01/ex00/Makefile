@@ -1,15 +1,17 @@
 SRCS = main.cpp newZombie.cpp randomChump.cpp Zombie.cpp
 CC = c++
 NAME = braiiinz
-
+HEADERS = Zombie.hpp
 CFLAG = -Wall -Wextra -Werror -std=c++98
 OBJS = $(SRCS:.cpp=.o)
-
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAG) -o $(NAME) $(OBJS)
+
+%.o : %.cpp $(HEADERS) Makefile
+	$(CC) $(CFLAG) -I . -c $< -o $@
 
 clean:
 	rm -f $(OBJS)

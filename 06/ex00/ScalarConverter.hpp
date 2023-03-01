@@ -1,6 +1,7 @@
 #pragma once
 
-#include <iostream>
+# include <iostream>
+# include <cstdlib>
 
 class ScalarConverter {
     public:
@@ -40,4 +41,5 @@ class ScalarConverter {
         double      _d;  
         bool        _possible;
         int         _count;
+        int         _dot;
 };

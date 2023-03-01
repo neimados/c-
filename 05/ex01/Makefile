@@ -1,15 +1,17 @@
 SRCS = main.cpp Bureaucrat.cpp Form.cpp
 CC = c++
 NAME = maggots
-
+HEADERS = Bureaucrat.hpp Form.hpp
 CFLAG = -Wall -Wextra -Werror -std=c++98
 OBJS = $(SRCS:.cpp=.o)
-
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(CC) $(CFLAG) -o $(NAME) $(OBJS)
+
+%.o : %.cpp $(HEADERS) Makefile
+	$(CC) $(CFLAG) -I . -c $< -o $@
 
 clean:
 	rm -f $(OBJS)

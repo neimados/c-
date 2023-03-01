@@ -3,7 +3,8 @@
 ScalarConverter::ScalarConverter() :	_str(""),
 										_d(0.0),
 										_possible(true),
-										_count(0)
+										_count(0),
+										_dot(0)
 {
     std::cout<<"ScalarConverter default constructor called"<<std::endl;
 	std::cout<<"Missing parameter"<<std::endl;
@@ -11,7 +12,8 @@ ScalarConverter::ScalarConverter() :	_str(""),
 
 ScalarConverter::ScalarConverter(std::string &str) :	_str(str),
 														_possible(true),
-														_count(0)
+														_count(0),
+														_dot(0)
 {
 	this->_d = std::strtod(str.c_str(), NULL);
 	std::cout<<"ScalarConverter constructor called"<<std::endl;
@@ -33,17 +35,19 @@ ScalarConverter::~ScalarConverter(){
 }
 
 void	ScalarConverter::check(){
-	for (int i = 0; i < _str.length(); i++){
+	for (unsigned int i = 0; i < _str.length(); i++){
 		if (_str[i] < 48 || _str[i] > 57){
-			if (_str[i] == '.' && (i != 0 || i != _str.length() - 1))
+			if (_str[i] == '.' && (i != 0 || i != _str.length() - 1)){
+				_dot += 1;
 				continue;
+			}
 			else if (_str[i] == 'f' && i == _str.length() - 1)
 				continue;
 			else
 				_count += 1;
 		}
 	}
-	if (_count)
+	if (_count || _dot > 1)
 		_possible = false;
 	if (_str == "nan" || _str == "+inf" || _str == "-inf"
 		|| _str == "nanf" || _str == "+inff" || _str == "-inff"

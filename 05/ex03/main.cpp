@@ -11,7 +11,6 @@ int	main(void){
 	AForm	*sForm;
 	AForm	*rForm;
 	AForm	*pForm;
-	AForm	*fakeForm;
 
 	try{
 		std::cout<<std::endl;
@@ -21,9 +20,6 @@ int	main(void){
 		std::cout<<rForm->getTarget()<<std::endl;
 		pForm = i2->makeForm("presidential pardon", "Kiki");
 		std::cout<<pForm->getTarget()<<std::endl;
-		std::cout<<std::endl;
-
-		fakeForm = i->makeForm("fake form", "faker");
 		std::cout<<std::endl;
 	}
 	catch(std::exception &e){

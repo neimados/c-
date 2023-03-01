@@ -51,11 +51,11 @@ bool	Form::getSigned() const{
 	return this->_signed;
 }
 
-const int	Form::getSignReq() const{
+int	Form::getSignReq() const{
 	return this->_signReq;
 }
 
-const int	Form::getExecReq() const{
+int	Form::getExecReq() const{
 	return this->_execReq;
 }
 

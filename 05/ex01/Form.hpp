@@ -25,8 +25,8 @@ class Form {
 
 		const std::string	getName() const;
 		bool				getSigned() const;
-		const int			getSignReq() const;
-		const int			getExecReq() const;
+		int					getSignReq() const;
+		int					getExecReq() const;
 
 		void	beSigned(const Bureaucrat &b);
 

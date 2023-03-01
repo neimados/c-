@@ -19,17 +19,16 @@ int	main(int argc, char **argv){
 		std::cout<<std::endl;
 		switch (level){
 			case 0:
-				harl2.complain("debug");
-				std::cout<<std::endl;
+					harl2.complain("debug");
 			case 1:
-				harl2.complain("info");
-				std::cout<<std::endl;
+					harl2.complain("info");
 			case 2:
-				harl2.complain("warning");
-				std::cout<<std::endl;
+					harl2.complain("warning");
 			case 3:
-				harl2.complain("error");
-				std::cout<<std::endl;
+					harl2.complain("error");
+					break;
+			default:
+				std::cout << "Default answer";
 		}
 	} else {
 		std::cout<<"Wrong argument"<<std::endl;

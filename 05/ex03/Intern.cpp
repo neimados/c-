@@ -10,7 +10,8 @@ Intern::Intern(const Intern &i){
 }
 
 Intern &Intern::operator= (const Intern &i){
-	std::cout<<"Intern assignment operator called"<<std::endl;
+	if (this != &i)
+		std::cout<<"Intern assignment operator called"<<std::endl;
 	return *this;
 }
 

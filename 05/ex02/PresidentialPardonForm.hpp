@@ -9,7 +9,7 @@ class PresidentialPardonForm: public AForm
 		PresidentialPardonForm(const std::string &target);
 		PresidentialPardonForm(const PresidentialPardonForm &s);
 		PresidentialPardonForm &operator= (const PresidentialPardonForm &s);
-		~PresidentialPardonForm();
+		virtual ~PresidentialPardonForm();
 
 		void	execute(const Bureaucrat &executor) const;
 };

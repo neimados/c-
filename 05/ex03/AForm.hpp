@@ -12,7 +12,7 @@ class AForm {
 		AForm(const std::string &name, const int signReq, const int execReq, const std::string &target);
 		AForm(const AForm &f);
 		AForm &operator=(const AForm &f);
-		~AForm();
+		virtual ~AForm();
 
 		class GradeTooHighException : public std::exception{
 			public: 
@@ -29,8 +29,8 @@ class AForm {
 
 		const std::string	getName() const;
 		bool				getSigned() const;
-		const int			getSignReq() const;
-		const int			getExecReq() const;
+		int					getSignReq() const;
+		int					getExecReq() const;
 		const std::string	getTarget() const;
 
 		void			beSigned(const Bureaucrat &b);

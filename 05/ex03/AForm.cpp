@@ -55,11 +55,11 @@ bool	AForm::getSigned() const{
 	return this->_signed;
 }
 
-const int	AForm::getSignReq() const{
+int	AForm::getSignReq() const{
 	return this->_signReq;
 }
 
-const int	AForm::getExecReq() const{
+int	AForm::getExecReq() const{
 	return this->_execReq;
 }
 

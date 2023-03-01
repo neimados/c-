@@ -1,6 +1,7 @@
 #pragma once
 
-#include "AForm.hpp"
+# include "AForm.hpp"
+# include <cstdlib>
 
 class RobotomyRequestForm: public AForm
 {
@@ -9,7 +10,7 @@ class RobotomyRequestForm: public AForm
 		RobotomyRequestForm(const std::string &target);
 		RobotomyRequestForm(const RobotomyRequestForm &s);
 		RobotomyRequestForm &operator= (const RobotomyRequestForm &s);
-		~RobotomyRequestForm();
+		virtual ~RobotomyRequestForm();
 
 		void	execute(const Bureaucrat &executor) const;
 };
