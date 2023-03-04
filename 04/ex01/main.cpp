@@ -50,7 +50,18 @@ int main()
 
 	std::cout<<std::endl;
 	std::cout<<std::endl;
+	Dog basic;
+	{
+		std::cout << std::endl;
+		Dog tmp = basic;
+		std::cout << basic.accessBrain() << std::endl;
+		std::cout << tmp.accessBrain() << std::endl;
+	}
+
+	std::cout<<std::endl;
+	std::cout<<std::endl;
 	delete copy;
+
 
 	return 0;
 }

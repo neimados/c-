@@ -5,25 +5,25 @@
 template <typename T>
 class Array{
 	public: 
-		Array() :	_size(0)
+		Array<T>() :	_size(0)
 		{
-			_arr = new T[0];
+			_arr = new T[_size];
 			std::cout<<"Array default constructor called"<<std::endl;
 		}
 
-		Array(unsigned int n):	_size(n)
+		Array<T>(unsigned int n):	_size(n)
 		{
 			_arr = new T[n];
 			std::cout<<"Array constructor called"<<std::endl;
 		}
 
-		Array(const Array &a){
+		Array<T>(const Array<T> &a){
 			std::cout<<"Array copy constructor called"<<std::endl;
 			_arr = new T[a._size];
 			*this = a;
 		}
 
-		Array &operator=(const Array &a){
+		Array<T> &operator=(const Array<T> &a){
 			_size = a._size;
 			for (unsigned int i = 0; i < _size; i++){
 				_arr[i] = a._arr[i];
@@ -31,8 +31,14 @@ class Array{
 			std::cout<<"Array assignement operator called"<<std::endl;
 			return *this;
 		}
+
+		T &operator[](int i) {
+		if (i < 0 || (unsigned int)i >= this->_size)
+			throw Array::InvalidIndex();
+		return _arr[i];
+		}
 		
-		~Array(){
+		~Array<T>(){
 			if (_arr)
 				delete [] _arr;
 			std::cout<<"Array destructor called"<<std::endl;

@@ -1,17 +1,18 @@
 #include "Dog.hpp"
 
-Dog::Dog(): _b(new Brain())
+Dog::Dog(): AAnimal(), _b(new Brain())
 {
-	this->type = "Dog";
 	std::cout<<"Dog default constructor called"<<std::endl;
+	this->type = "Dog";
 }
 
-Dog::Dog(std::string name): AAnimal(name), _b(new Brain()){
-	this->type = name;
+Dog::Dog(std::string name): AAnimal(name), _b(new Brain())
+{
 	std::cout<<"Dog constructor called"<<std::endl;
+	this->type = name;
 }
 
-Dog::Dog(const Dog &d): AAnimal(d)
+Dog::Dog(const Dog &d): AAnimal(d), _b(new Brain(*d._b))
 {
 	std::cout<<"Dog copy constructor called"<<std::endl;
 	*this = d;
@@ -20,9 +21,7 @@ Dog::Dog(const Dog &d): AAnimal(d)
 Dog &Dog::operator=(const Dog &d){
 	std::cout<<"Dog copy assignment operator called"<<std::endl;
 	this->type = d.type;
-	for (int i = 0; i < 100; i++){
-		this->_b[i] = d._b[i];
-	}
+	*this->_b = *d._b;
 	return *this;
 }
 

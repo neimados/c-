@@ -10,9 +10,10 @@ Cat::Cat(): _b(new Brain())
 Cat::Cat(std::string name): AAnimal(name), _b(new Brain())
 {
 	std::cout<<"Cat constructor called"<<std::endl;
+	this->type = name;
 }
 
-Cat::Cat(const Cat &c): AAnimal(c)
+Cat::Cat(const Cat &c): AAnimal(c), _b(new Brain())
 {
 	std::cout<<"Cat copy constructor called"<<std::endl;
 	*this = c;

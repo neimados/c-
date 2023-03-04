@@ -5,7 +5,8 @@ Brain::Brain(){
 	std::cout<<"Brain default constructor called"<<std::endl;
 }
 
-Brain::Brain(const Brain &b){
+Brain::Brain(const Brain &b)
+{
 	std::cout<<"Brain copy constructor called"<<std::endl;
 	*this = b;
 }

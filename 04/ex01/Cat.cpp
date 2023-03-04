@@ -10,9 +10,10 @@ Cat::Cat(): _b(new Brain())
 Cat::Cat(std::string name): Animal(name), _b(new Brain())
 {
 	std::cout<<"Cat constructor called"<<std::endl;
+	this->type = name;
 }
 
-Cat::Cat(const Cat &c): Animal(c)
+Cat::Cat(const Cat &c): Animal(c), _b(new Brain())
 {
 	std::cout<<"Cat copy constructor called"<<std::endl;
 	*this = c;
@@ -21,7 +22,7 @@ Cat::Cat(const Cat &c): Animal(c)
 Cat &Cat::operator=(const Cat &c){
 	std::cout<<"Cat copy assignment operator called"<<std::endl;
 	this->type = c.type;
-	this->_b = new Brain(*c.accessBrain());
+	*this->_b = *c._b;
 	return *this;
 }
 
