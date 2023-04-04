@@ -22,7 +22,7 @@ Cat::Cat(const Cat &c): AAnimal(c), _b(new Brain())
 Cat &Cat::operator=(const Cat &c){
 	std::cout<<"Cat copy assignment operator called"<<std::endl;
 	this->type = c.type;
-	this->_b = new Brain(*c.accessBrain());
+	*this->_b = *c._b;
 	return *this;
 }
 

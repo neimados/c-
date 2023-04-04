@@ -38,6 +38,7 @@ int main()
 
 	std::cout<<std::endl;
 	std::cout<<std::endl;
+	
 	const Cat	*copy = new Cat(*c);
 
 	std::cout<<std::endl;

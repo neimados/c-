@@ -27,7 +27,7 @@ ShrubberyCreationForm::~ShrubberyCreationForm(){
 
 void	ShrubberyCreationForm::execute(const Bureaucrat &b) const{
 	std::ofstream		output;
-	std::string			filename = b.getName() + "_shrubbery";
+	std::string			filename = this->getTarget() + "_shrubbery";
 	std::string 		tree =	
 "    oxoxoo    ooxoo\n\
   ooxoxo oo  oxoxooo\n\

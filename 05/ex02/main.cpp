@@ -8,7 +8,7 @@
 int	main(void){
 
 	srand(time(0));
-	Bureaucrat	*a = new Bureaucrat("aaa", 1);	
+	Bureaucrat	*a = new Bureaucrat("aaa", 1);
 	Bureaucrat	*b = new Bureaucrat("bbb", 140);
 	ShrubberyCreationForm	*s  = new ShrubberyCreationForm("Jardin");
 	ShrubberyCreationForm	*s2 = new ShrubberyCreationForm(*s);
@@ -20,18 +20,18 @@ int	main(void){
 
 	std::cout<<std::endl;
 	std::cout<<*s<<std::endl;
-	delete s;
 	std::cout<<*s2<<std::endl;
 
 	std::cout<<std::endl;
 	std::cout<<s2->getTarget()<<std::endl;
 	try{
-		s2->beSigned(*a);
-		s2->execute(*b);
+		s->beSigned(*a);
+		a->executeForm(*s);
 	}
 	catch(std::exception &e){
 		std::cout<<e.what()<<std::endl;
 	}
+	delete s;
 
 	std::cout<<std::endl;
 	try{
