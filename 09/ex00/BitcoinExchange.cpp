@@ -105,10 +105,9 @@ void	BitcoinExchange::checkData(std::string &s1, std::string &s2){
 }
 
 bool	BitcoinExchange::checkDate(std::string &s1) const{
-	int year = std::atoi((s1.substr(0 , 4)).c_str());
 	int month = std::atoi((s1.substr(5 , 2)).c_str());
 	int day = std::atoi((s1.substr(8 , 2)).c_str());
-	if (year < 2009 || year > 2022)
+	if (s1 < _m.begin()->first)
 		return 1;
 	if (month < 1 || month > 12)
 		return 1;
