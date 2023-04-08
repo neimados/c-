@@ -29,6 +29,7 @@ BitcoinExchange::~BitcoinExchange(){
 void	BitcoinExchange::fillMap(){
 	std::ifstream		db;
 	std::string			line = "";
+	int					i = 0;
 
 	db.open(_db.c_str());
 	if (!db.is_open()){
@@ -36,9 +37,47 @@ void	BitcoinExchange::fillMap(){
 		return;
 	}
 	while (std::getline(db, line)){
-		_m.insert(std::pair<std::string, std::string>((line.substr(0, 10)), (line.substr(11, line.size() - 11))));
+		if (checkDb(line) && i != 0){
+			db.close();
+			throw BitcoinExchange::DbError();
+		}
+		if (i != 0)
+			_m.insert(std::pair<std::string, std::string>((line.substr(0, 10)), (line.substr(11, line.size() - 11))));
+		i++;
 	}
 	db.close();
+	if (_m.size() == 0)
+		throw BitcoinExchange::DbError();
+}
+
+bool	BitcoinExchange::checkDb(std::string &line){
+	if (line.size() < 10)
+		return 1;
+	if (line[4] != '-' || line [7] != '-'){
+		return 1;
+	}
+	if (!isdigit(line[0]) || !isdigit(line[1]) || !isdigit(line[2]) || !isdigit(line[3])
+	|| !isdigit(line[5]) || !isdigit(line[6]) || !isdigit(line[8]) || !isdigit(line[9]))
+		return 1;
+	int dot = 0;
+	std::size_t found = line.find(',');
+	if (found == std::string::npos)
+		return 1;
+	found++;
+	while (found != line.size()){
+		if (!isdigit(line[found])){
+			if (line[found] == '.' || std::isspace(line[found])){
+				if (line[found] == '.')
+					dot++;
+			}
+			else
+				return 1;
+		}
+		found++;
+	}
+	if (dot > 1)
+		return 1;
+	return 0;
 }
 
 void	BitcoinExchange::printData(void){
@@ -174,4 +213,8 @@ std::string BitcoinExchange::pickDate(int &y, int &m, int &d) const{
 	else
 		date.append(dd.str());
 	return date;
+}
+
+const char* BitcoinExchange::DbError::what() const throw(){
+	return "Error: DB corrupted !";
 }

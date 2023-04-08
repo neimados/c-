@@ -21,8 +21,12 @@ int	main (int argc, char ** argv){
 		db.close();
 		input.close();
 		BitcoinExchange b("data.csv", argv[1]);
-		b.fillMap();
-		b.printData();
+		try{
+			b.fillMap();
+			b.printData();
+		} catch (std::exception &e){
+			std::cout<<e.what()<<std::endl;
+		}
 	}
 
 	return 0;

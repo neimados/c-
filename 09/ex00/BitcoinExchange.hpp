@@ -18,11 +18,17 @@ class BitcoinExchange{
 
 		void		fillMap();
 		void		printData();
+		bool		checkDb(std::string &line);
 		void		checkData(std::string &s1, std::string &s2);
 		bool		checkDate(std::string &s1) const;
 		int			checkNum(std::string &s2) const;
 		std::string	getRate(std::string &s1, std::string &s2) const;
 		std::string	pickDate(int &y, int &m, int &d) const;
+
+		class DbError : public std::exception {
+			public:
+				virtual const char* what() const throw();
+		};
 
 	private:
 		std::map<std::string, std::string>	_m;
