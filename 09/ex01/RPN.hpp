@@ -3,6 +3,7 @@
 #include <iostream>
 #include <stack>
 #include <cstdlib>
+#include <iomanip>
 
 class RPN{
 	public:
@@ -15,7 +16,7 @@ class RPN{
 		void	fillStack();
 		void	firstCalc();
 		void	calculate();
-		int		signOp(int a, int b, char c);
+		double	signOp(double a, double b, char c);
 
 		class InputError : public std::exception {
 			public:
@@ -24,6 +25,6 @@ class RPN{
 
 	private:
 		std::string			_input;
-		int					_res;
+		double				_res;
 		std::stack<char>	_s;
 };

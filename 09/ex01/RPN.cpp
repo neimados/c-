@@ -31,21 +31,10 @@ void RPN::fillStack(){
 	}
 	if (_s.size() < 3)
 		throw RPN::InputError();
-
-	// //print test
-	// int size = _s.size();
-	// for (int j = 0; j < size; j++){
-	// 	std::cout<<_s.top()<<std::endl;
-	// 	_s.pop();
-	// }
-	
 }
 
 void	RPN::firstCalc(){
 	int	a, b = 0;
-	char sign;
-	int size = _s.size();
-
 	for (int i = 0; i < 3; i++){
 		if (i <= 1 && (_s.top() == '+' || _s.top() == '-'
 		|| _s.top() == '*' || _s.top() == '/'))
@@ -61,6 +50,10 @@ void	RPN::firstCalc(){
 }
 
 void	RPN::calculate(){
+	if (_s.size() == 0){
+		std::cout<<_res<<std::endl;
+		return;
+	}
 	if (_s.size() < 2)
 		throw RPN::InputError();
 	int size = _s.size();
@@ -82,7 +75,7 @@ void	RPN::calculate(){
 	std::cout<<_res<<std::endl;
 }
 
-int	RPN::signOp(int a, int b, char c){
+double	RPN::signOp(double a, double b, char c){
 	if (c == '+')
 		return (a + b);
 	if (c == '-')
