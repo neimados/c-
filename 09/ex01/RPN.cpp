@@ -82,8 +82,11 @@ double	RPN::signOp(double a, double b, char c){
 		return (a - b);
 	if (c == '*')
 		return (a * b);
-	if (c == '/')
+	if (c == '/'){
+		if (b == 0)
+			throw RPN::InputError();
 		return (a / b);
+	}
 	return 0;
 }
 
