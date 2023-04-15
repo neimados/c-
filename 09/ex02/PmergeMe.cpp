@@ -12,6 +12,7 @@ PmergeMe::PmergeMe(int argc, char **argv){
 		_deq.push_back(convertInt(argv[j]));
 	}
 	_size = _vec.size();
+	_origin = _vec;
 }
 
 PmergeMe::PmergeMe(PmergeMe const &p){
@@ -43,77 +44,153 @@ int	PmergeMe::convertInt(std::string argv){
 	return res;
 }
 
-void PmergeMe::printVec(){
-	std::vector<int>::iterator it = _vec.begin();
-	while (it != _vec.end()){
-		std::cout<<*it<<std::endl;
+void PmergeMe::printSort(){
+	std::vector<int>::iterator it;
+	it = _origin.begin();
+	std::cout<<"Before: ";
+	while (it != _origin.end()){
+		std::cout<<*it<<" ";
 		it++;
 	}
-	double time = static_cast<double>(_vecEnd - _vecBegin) / CLOCKS_PER_SEC * 1000;
-	std::cout << "Time to process a range of " << _size << " elements with std::[vector]: " << time << "us" << std::endl;
+	std::cout<<std::endl<<"Afer: ";
+	it = _vec.begin();
+	while (it != _vec.end()){
+		std::cout<<*it<<" ";
+		it++;
+	}
+	std::cout<<std::endl;
+	double vtime = static_cast<double>(_vecEnd - _vecBegin) / CLOCKS_PER_SEC * 1000 * 1000;
+	double dtime = static_cast<double>(_deqEnd - _deqBegin) / CLOCKS_PER_SEC * 1000 * 1000;
+	std::cout << "Time to process a range of " << _size << " elements with std::[vector] : " << vtime << "us" << std::endl;
+	std::cout << "Time to process a range of " << _size << " elements with std::[deque] : " << dtime << "us" << std::endl;
 }
 
 int	PmergeMe::getSize(){
 	return _size;
 }
 
-void PmergeMe::sortVec(int begin, int end){
-	if (end - begin > 5) {
-		int mid = (begin + end) / 2;
-		sortVec(begin, mid);
-		sortVec(mid + 1, end);
-		mergeVec(begin, mid, end);
-	} else {
-		insertVec(begin, end);
+void PmergeMe::sortVec(int left, int right){
+	int n = right - left + 1;
+
+	if (n < 5) {
+		insertVec(left, right);
+		return;
+	}
+	int mid = (left + right) / 2;
+	sortVec(left, mid);
+	sortVec(mid + 1, right);
+	mergeVec(left, mid, right);
+}
+
+void PmergeMe::mergeVec(int left, int mid, int right){
+	int i, j = 0;
+	std::vector<int> tmp;
+
+	i = left;
+	j = mid + 1;
+	while (i <= mid && j <= right) {
+		if (_vec[i] < _vec[j]) {
+			tmp.push_back(_vec[i]);
+			i++;
+		}
+		else {
+			tmp.push_back(_vec[j]);
+			j++;
+		}
+	}
+	while (i <= mid) {
+		tmp.push_back(_vec[i]);
+		i++;
+	}
+	while (j <= right) {
+		tmp.push_back(_vec[j]);
+		j++;
+	}
+	i = left;
+	j = 0;
+	while (i <= right) {
+		_vec[i] = tmp[j];
+		i++;
+		j++;
 	}
 }
 
-void PmergeMe::mergeVec(int begin, int mid, int end){
-	int n1 = mid - begin + 1;
-	int n2 = end - mid;
-	int lindex, rindex = 0;
-	std::vector<int> left;
-	std::vector<int> right;
+void PmergeMe::insertVec(int left, int right) {
+	int tmp;
+	int i;
+	int j;
 
-	for(int i = 0; i <= mid; i++){
-		left.push_back(_vec[i]);
-	}
-	for (int j = mid + 1; j <= end; j++){
-		right.push_back(_vec[j]);
-	}
-	for (int k = begin; k < end - begin + 1; k++){
-		if (rindex == n2){
-			_vec[k] = left[lindex];
-			lindex++;
-		} else if (lindex == n1) {
-			_vec[k] = right[rindex];
-			rindex++;
-		} else if (right[rindex] > left[lindex]) {
-			_vec[k] = left[lindex];
-			lindex++;
-		} else {
-			_vec[k] = right[rindex];
-			rindex++;
-		}
-	}
-}
-
-void PmergeMe::insertVec(int begin, int mid) {
-	for (int i = begin; i < mid; i++){
-		int tmp = _vec[i + 1];
-		int j = i + 1;
-		while (j > begin && _vec[j -1] > tmp) {
-			_vec[j] = _vec[j - 1];
-			j--;
-		}
-		_vec[j] = tmp;
-	}
-	std::vector<int> vecTmp;
-	for (int j = begin; j <= mid; j++) {
-		vecTmp.push_back(_vec[j]);
+	for (i = left + 1; i <= right; i++) {
+		tmp = _vec[i];
+		for (j = i - 1; j >= left && _vec[j] > tmp; j--)
+			_vec[j + 1] = _vec[j];
+		_vec[j + 1] = tmp;
 	}
 }
 
 void	PmergeMe::setTimeVec(){
 	_vecEnd = clock();
+}
+
+void PmergeMe::sortDeq(int left, int right){
+	int n = right - left + 1;
+
+	if (n < 5) {
+		insertDeq(left, right);
+		return;
+	}
+	int mid = (left + right) / 2;
+	sortDeq(left, mid);
+	sortDeq(mid + 1, right);
+	mergeDeq(left, mid, right);
+}
+
+void PmergeMe::mergeDeq(int left, int mid, int right){
+	int i, j = 0;
+	std::deque<int> tmp;
+
+	i = left;
+	j = mid + 1;
+	while (i <= mid && j <= right) {
+		if (_deq[i] < _deq[j]) {
+			tmp.push_back(_deq[i]);
+			i++;
+		}
+		else {
+			tmp.push_back(_deq[j]);
+			j++;
+		}
+	}
+	while (i <= mid) {
+		tmp.push_back(_deq[i]);
+		i++;
+	}
+	while (j <= right) {
+		tmp.push_back(_deq[j]);
+		j++;
+	}
+	i = left;
+	j = 0;
+	while (i <= right) {
+		_deq[i] = tmp[j];
+		i++;
+		j++;
+	}
+}
+
+void PmergeMe::insertDeq(int left, int right) {
+	int tmp;
+	int i;
+	int j;
+
+	for (i = left + 1; i <= right; i++) {
+		tmp = _deq[i];
+		for (j = i - 1; j >= left && _deq[j] > tmp; j--)
+			_deq[j + 1] = _deq[j];
+		_deq[j + 1] = tmp;
+	}
+}
+
+void	PmergeMe::setTimeDeq(){
+	_deqEnd = clock();
 }

@@ -9,7 +9,9 @@ int	main(int argc, char **argv){
 		PmergeMe p(argc, argv);
 		p.sortVec(0, p.getSize() - 1);
 		p.setTimeVec();
-		p.printVec();
+		p.sortDeq(0, p.getSize() - 1);
+		p.setTimeDeq();
+		p.printSort();
 	} catch (std::exception &e) {
 		std::cout<<e.what()<<std::endl;
 	}

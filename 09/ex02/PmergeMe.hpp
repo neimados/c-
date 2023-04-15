@@ -16,11 +16,15 @@ class PmergeMe{
 
 		int convertInt(std::string argv);
 		int	getSize();
-		void printVec();
-		void sortVec(int begin, int end);
-		void mergeVec(int begin, int mid, int end);
-		void insertVec(int begin, int mid);
+		void printSort();
+		void sortVec(int left, int right);
+		void mergeVec(int left, int mid, int right);
+		void insertVec(int left, int right);
 		void setTimeVec();
+		void sortDeq(int left, int right);
+		void mergeDeq(int left, int mid, int right);
+		void insertDeq(int left, int right);
+		void setTimeDeq();
 
 		class InputError : public std::exception {
 			public:
@@ -30,6 +34,7 @@ class PmergeMe{
 	private:
 		int					_size;
 		std::vector<int>	_vec;
+		std::vector<int>	_origin;
 		std::deque<int>		_deq;
 		clock_t				_vecBegin;
 		clock_t				_vecEnd;
