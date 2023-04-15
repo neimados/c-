@@ -6,19 +6,19 @@
 #include "Intern.hpp"
 
 int	main(void){
-	Intern	*i = new Intern;
-	Intern	*i2 = new Intern(*i);
+	Intern	i;
+	Intern	i2(i);
 	AForm	*sForm;
 	AForm	*rForm;
 	AForm	*pForm;
 
 	try{
 		std::cout<<std::endl;
-		sForm = i->makeForm("shrubbery creation", "Bibi");
+		sForm = i.makeForm("shrubbery creation", "Bibi");
 		std::cout<<sForm->getTarget()<<std::endl;
-		rForm = i->makeForm("robotomy request", "Bender");
+		rForm = i.makeForm("robotomy request", "Bender");
 		std::cout<<rForm->getTarget()<<std::endl;
-		pForm = i2->makeForm("presidential pardon", "Kiki");
+		pForm = i2.makeForm("presidential pardon", "Kiki");
 		std::cout<<pForm->getTarget()<<std::endl;
 		std::cout<<std::endl;
 	}
@@ -26,12 +26,10 @@ int	main(void){
 		std::cout<<e.what()<<std::endl;
 	}
 	
-	std::cout<<std::endl;
 	delete sForm;
 	delete rForm;
 	delete pForm;
-	delete i;
-	delete i2;
-
+	
+	std::cout<<std::endl;
 	return 0;
 }

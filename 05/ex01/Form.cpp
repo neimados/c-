@@ -70,7 +70,6 @@ const char* Form::GradeTooLowException::what() const throw(){
 void	Form::beSigned(const Bureaucrat &b){
 	if (b.getGrade() > this->_signReq || b.getGrade() > this->_execReq){
 		std::cout<<b.getName()<<" couldn't sign "<<this->getName()<<" because his grade is too low."<<std::endl;
-		delete this;
 		throw Form::GradeTooLowException();
 	}
 	this->_signed = true;

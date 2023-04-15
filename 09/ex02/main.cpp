@@ -5,7 +5,14 @@ int	main(int argc, char **argv){
 		std::cout<<"Arguments error !"<<std::endl;
 		return 1;
 	}
-	
+	try {
+		PmergeMe p(argc, argv);
+		p.sortVec(0, p.getSize() - 1);
+		p.setTimeVec();
+		p.printVec();
+	} catch (std::exception &e) {
+		std::cout<<e.what()<<std::endl;
+	}
 
 	return 0;
 }
