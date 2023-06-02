@@ -37,15 +37,15 @@ void	identify(Base* p){
 
 void	identify(Base& p){
 	try {
-		dynamic_cast<A &>(p);
-		std::cout<<"Base is A (ref)"<<std::endl;
+		A aa = dynamic_cast<A &>(p);
+		std::cout<<"Base is A (ref)"<<std::endl;	
 	} catch (std::exception &e){}
 	try {
-		dynamic_cast<B &>(p);
+		B bb = dynamic_cast<B &>(p);
 		std::cout<<"Base is B (ref)"<<std::endl;
 	} catch (std::exception &e){}
 	try {
-		dynamic_cast<C &>(p);
+		C cc = dynamic_cast<C &>(p);
 		std::cout<<"Base is C (ref)"<<std::endl;
 	} catch (std::exception &e){}
 }
