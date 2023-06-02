@@ -74,7 +74,11 @@
 		"random": "cpp",
 		"list": "cpp",
 		"cinttypes": "cpp",
-		"map": "cpp"
+		"map": "cpp",
+		"condition_variable": "cpp",
+		"semaphore": "cpp",
+		"stop_token": "cpp",
+		"thread": "cpp"
 	},
 	"C_Cpp.errorSquiggles": "disabled"
 }

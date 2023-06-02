@@ -1,6 +1,6 @@
 SRCS = main.cpp ScalarConverter.cpp
 CC = c++
-NAME = scalar
+NAME = convert
 HEADERS = ScalarConverter.hpp
 CFLAG = -Wall -Wextra -Werror -std=c++98
 OBJS = $(SRCS:.cpp=.o)

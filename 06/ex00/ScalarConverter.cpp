@@ -1,89 +1,98 @@
 #include "ScalarConverter.hpp"
 
-ScalarConverter::ScalarConverter() :	_str(""),
-										_d(0.0),
-										_possible(true),
-										_count(0),
-										_dot(0)
-{
-    std::cout<<"ScalarConverter default constructor called"<<std::endl;
-	std::cout<<"Missing parameter"<<std::endl;
-}
+// ScalarConverter::ScalarConverter() :	_str(""),
+// 										_d(0.0),
+// 										_possible(true),
+// 										_count(0),
+// 										_dot(0)
+// {
+//     std::cout<<"ScalarConverter default constructor called"<<std::endl;
+// 	std::cout<<"Missing parameter"<<std::endl;
+// }
 
-ScalarConverter::ScalarConverter(std::string &str) :	_str(str),
-														_possible(true),
-														_count(0),
-														_dot(0)
-{
-	this->_d = std::strtod(str.c_str(), NULL);
-	std::cout<<"ScalarConverter constructor called"<<std::endl;
-}
+// ScalarConverter::ScalarConverter(std::string &str) :	_str(str),
+// 														_possible(true),
+// 														_count(0),
+// 														_dot(0)
+// {
+// 	this->_d = std::strtod(str.c_str(), NULL);
+// 	std::cout<<"ScalarConverter constructor called"<<std::endl;
+// }
 
-ScalarConverter::ScalarConverter(const ScalarConverter &conv){
-    std::cout<<"ScalarConverter copy constructor called"<<std::endl;
-    *this = conv;
-}
+// ScalarConverter::ScalarConverter(const ScalarConverter &conv){
+//     std::cout<<"ScalarConverter copy constructor called"<<std::endl;
+//     *this = conv;
+// }
 
-ScalarConverter &ScalarConverter::operator= (const ScalarConverter &conv){
-    std::cout<<"ScalarConverter assignment operator called"<<std::endl;
-	this->_str = conv._str;
-    return *this;
-}
+// ScalarConverter &ScalarConverter::operator= (const ScalarConverter &conv){
+//     std::cout<<"ScalarConverter assignment operator called"<<std::endl;
+// 	this->_str = conv._str;
+//     return *this;
+// }
 
-ScalarConverter::~ScalarConverter(){
-    std::cout<<"ScalarConverter destructor called"<<std::endl;
-}
+// ScalarConverter::~ScalarConverter(){
+//     std::cout<<"ScalarConverter destructor called"<<std::endl;
+// }
 
-void	ScalarConverter::check(){
-	for (unsigned int i = 0; i < _str.length(); i++){
-		if (_str[i] < 48 || _str[i] > 57){
-			if (_str[i] == '.' && (i != 0 || i != _str.length() - 1)){
-				_dot += 1;
+int	ScalarConverter::check(std::string &input){
+	int count = 0;
+	int dot = 0;
+
+	for (unsigned int i = 0; i < input.length(); i++){
+		if (input[i] < 48 || input[i] > 57){
+			if (input[i] == '.' && (i != 0 || i != input.length() - 1)){
+				dot += 1;
 				continue;
 			}
-			else if (_str[i] == 'f' && i == _str.length() - 1)
+			else if (input[i] == 'f' && i == input.length() - 1)
 				continue;
 			else
-				_count += 1;
+				count += 1;
 		}
 	}
-	if (_count || _dot > 1)
-		_possible = false;
-	if (_str == "nan" || _str == "+inf" || _str == "-inf"
-		|| _str == "nanf" || _str == "+inff" || _str == "-inff"
-		|| _str == "inf" || _str == "inff")
-		_possible = true;
+	if (input == "nan" || input == "+inf" || input == "-inf"
+		|| input == "nanf" || input == "+inff" || input == "-inff"
+		|| input == "inf" || input == "inff")
+		return 1;
+	if (count || dot > 1)
+		return 0;
+
+	return 1;
 }
 
 
-void	ScalarConverter::convert(){
-	ScalarConverter::check();
-	ScalarConverter::toChar();
-	ScalarConverter::toInt();
-	ScalarConverter::toFloat();
-	ScalarConverter::toDouble();
+void	ScalarConverter::convert(std::string &input){
+	int i = 1;
+	i = ScalarConverter::check(input);
+
+	ScalarConverter::toChar(input);
+	ScalarConverter::toInt(input, i);
+	ScalarConverter::toFloat(input, i);
+	ScalarConverter::toDouble(input, i);
 }
 
-void	ScalarConverter::toChar() const{
+void	ScalarConverter::toChar(std::string &input) {
 	std::cout<<"char: ";
 	try{
-		ScalarConverter::convertChar();
+		ScalarConverter::convertChar(input);
 	}
 	catch (std::exception &e){
 		std::cout<<e.what()<<std::endl;
 	}
 }
 
-void	ScalarConverter::convertChar() const{
-	if (this->_str.length() == 1){
-		if (this->_str[0] < 48 || this->_str[0] > 57){
-			std::cout<<"'"<<this->_str[0]<<"'"<<std::endl;
+void	ScalarConverter::convertChar(std::string &input) {
+	if (input.length() == 1){
+		if (input[0] < 48 || input[0] > 57){
+			std::cout<<"'"<<input[0]<<"'"<<std::endl;
 			return;
 		}
 	}
-	if (this->_d >= 0 && this->_d <= 255){
-		if (this->_d >= 32 && this->_d <= 126){
-			char	c = static_cast<int>(this->_d);
+
+	double d = std::strtod(input.c_str(), NULL);
+	if (d >= 0 && d <= 255){
+		if (d >= 32 && d <= 126){
+			char	c = static_cast<int>(d);
 			std::cout<<"'"<<c<<"'"<<std::endl;
 		} else {
 		throw ScalarConverter::NonDisplayable();
@@ -93,25 +102,28 @@ void	ScalarConverter::convertChar() const{
 	}
 }
 
-void	ScalarConverter::toInt() const{
+void	ScalarConverter::toInt(std::string &input, int i) {
 	std::cout<<"int: ";
 	try{
-		ScalarConverter::convertInt();
+		ScalarConverter::convertInt(input, i);
 	}
 	catch (std::exception &e){
 		std::cout<<e.what()<<std::endl;
 	}
 }
 
-void	ScalarConverter::convertInt() const{
-	if (!_possible)
+void	ScalarConverter::convertInt(std::string &input, int i) {
+	if (i == 0)
 		throw ScalarConverter::Impossible();
-	if (this->_d == 0 && this->_str[0] != '0'){
+
+	double d = std::strtod(input.c_str(), NULL);
+
+	if (d == 0 && input[0] != '0'){
 		throw ScalarConverter::Impossible();
 	} else {
-		if (this->_d >= -2147483648 && this->_d <= 2147483647){
+		if (d >= -2147483648 && d <= 2147483647){
 
-			int	i = static_cast<int>(this->_d);
+			int	i = static_cast<int>(d);
 			std::cout<<i<<std::endl;
 		} else {
 			throw ScalarConverter::Impossible();
@@ -119,53 +131,59 @@ void	ScalarConverter::convertInt() const{
 	}
 }
 
-void	ScalarConverter::toFloat() const{
+void	ScalarConverter::toFloat(std::string &input, int i) {
 	std::cout<<"float: ";
 	try{
-		ScalarConverter::convertFloat();
+		ScalarConverter::convertFloat(input, i);
 	}
 	catch (std::exception &e){
 		std::cout<<e.what()<<std::endl;
 	}
 }
 
-void	ScalarConverter::convertFloat() const{
-	if (!_possible)
+void	ScalarConverter::convertFloat(std::string &input, int i) {
+	if (i == 0)
 		throw ScalarConverter::Impossible();
-	float	f = static_cast<float>(this->_d);
-	int		tmp = static_cast<int>(this->_d);
+	
+	double d = std::strtod(input.c_str(), NULL);
+
+	float	f = static_cast<float>(d);
+	int		tmp = static_cast<int>(d);
 	double	decimal = f - tmp;
 	if (!decimal)
 		std::cout<<f<<".0f"<<std::endl;
 	else {
-		if (_str == "+inf" || _str == "+inff")
+		if (input == "+inf" || input == "+inff")
 			std::cout<<'+';
 		std::cout<<f<<'f'<<std::endl;
 	}
 }
 
-void	ScalarConverter::toDouble() const{
+void	ScalarConverter::toDouble(std::string &input, int i) {
 	std::cout<<"double: ";
 	try{
-		ScalarConverter::convertDouble();
+		ScalarConverter::convertDouble(input, i);
 	}
 	catch (std::exception &e){
 		std::cout<<e.what()<<std::endl;
 	}
 }
 
-void	ScalarConverter::convertDouble() const{
-	if (!_possible)
+void	ScalarConverter::convertDouble(std::string &input, int i) {
+	if (i == 0)
 		throw ScalarConverter::Impossible();
-	int		tmp = static_cast<int>(this->_d);
-	double	decimal = _d - tmp;
+	
+	double d = std::strtod(input.c_str(), NULL);
+
+	int		tmp = static_cast<int>(d);
+	double	decimal = d - tmp;
 	if (!decimal)
-		std::cout<<_d<<".0"<<std::endl;
+		std::cout<<d<<".0"<<std::endl;
 	else {
-		if (_str == "+inf" || _str == "+inff")
-			std::cout<<'+'<<_d<<std::endl;
+		if (input == "+inf" || input == "+inff")
+			std::cout<<'+'<<d<<std::endl;
 		else
-			std::cout<<_d<<std::endl;
+			std::cout<<d<<std::endl;
 	}
 }
 

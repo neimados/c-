@@ -1,12 +1,4 @@
-#include "data.hpp"
-
-uintptr_t serialize(Data* ptr){
-	return reinterpret_cast<uintptr_t>(ptr);
-}
-
-Data*	deserialize(uintptr_t raw){
-	return reinterpret_cast<Data *>(raw);
-}
+#include "Serializer.hpp"
 
 int	main (void) {
 	Data *test = new Data();
@@ -16,19 +8,19 @@ int	main (void) {
 	test->i = 12;
 	std::cout<<"value i original = "<<test->i<<std::endl;
 
-	u = serialize(test);
+	u = Serializer::serialize(test);
 	std::cout<<"adress = "<<u<<std::endl;
 
-	ptr = deserialize(u);
+	ptr = Serializer::deserialize(u);
 	std::cout<<"value i ptr = "<<ptr->i<<std::endl;
 
 	test->i = 24;
 	std::cout<<"value i original = "<<test->i<<std::endl;
 
-	u = serialize(test);
+	u = Serializer::serialize(test);
 	std::cout<<"adress = "<<u<<std::endl;
 
-	ptr = deserialize(u);
+	ptr = Serializer::deserialize(u);
 	std::cout<<"value i ptr = "<<ptr->i<<std::endl;
 
 	delete test;

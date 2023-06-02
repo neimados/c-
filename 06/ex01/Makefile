@@ -1,7 +1,7 @@
-SRCS = data.cpp
+SRCS = Serializer.cpp main.cpp
 CC = c++
 NAME = serialize
-HEADERS = data.hpp
+HEADERS = Serializer.hpp
 CFLAG = -Wall -Wextra -Werror -std=c++98
 OBJS = $(SRCS:.cpp=.o)
 

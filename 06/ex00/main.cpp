@@ -5,11 +5,10 @@ int main(int argc, char **argv){
 		std::cout<<"Missing Argument!"<<std::endl;
 		return 1;
 	}
-	std::string	str = argv[1];
-    ScalarConverter *s = new ScalarConverter(str);
-	s->convert();
+	std::string	input = argv[1];
+    // ScalarConverter s;
 
-    delete s;
+	ScalarConverter::convert(input);
 
 	return 0;
 }

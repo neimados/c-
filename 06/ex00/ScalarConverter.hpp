@@ -5,26 +5,22 @@
 
 class ScalarConverter {
     public:
-        ScalarConverter();
-        ScalarConverter(std::string &str);
-        ScalarConverter(const ScalarConverter &conv);
-        ScalarConverter &operator=(const ScalarConverter &conv);
-        ~ScalarConverter();
 
-        void    check();
-        void    convert();
+        static void    convert(std::string &input);
 
-        void    toChar() const;
-        void    convertChar() const;
+        static int    check(std::string &input);
+
+        static void    toChar(std::string &input);
+        static void    convertChar(std::string &input);
         
-        void    toInt() const;
-        void    convertInt() const;
+        static void    toInt(std::string &input, int i);
+        static void    convertInt(std::string &input, int i);
 
-        void    toFloat() const;
-        void    convertFloat() const;
+        static void    toFloat(std::string &input, int i);
+        static void    convertFloat(std::string &input, int i);
 
-        void    toDouble() const;
-        void    convertDouble() const;
+        static void    toDouble(std::string &input, int i);
+        static void    convertDouble(std::string &input, int i);
 
         class NonDisplayable : public std::exception{
             public:
@@ -37,9 +33,15 @@ class ScalarConverter {
         };
 
     private:
-        std::string _str;
-        double      _d;  
-        bool        _possible;
-        int         _count;
-        int         _dot;
+        ScalarConverter();
+        ScalarConverter(std::string &str);
+        ~ScalarConverter();
+        ScalarConverter(const ScalarConverter &conv);
+        ScalarConverter &operator=(const ScalarConverter &conv);
+
+        // std::string _str;
+        // double      _d;  
+        // bool        _possible;
+        // int         _count;
+        // int         _dot;
 };
